@@ -143,7 +143,7 @@ function Bank(name, initCustomerList)
 		// Save the customer
 		this.customers[customer.getUserName()] = customer;
 
-
+		console.log("Created account for ", userName);
 	}
 	
 	// ----------------------------------------------
@@ -159,10 +159,8 @@ function Bank(name, initCustomerList)
 		
 		// Create and add user
 		this.createAndAddCustomer(userName, userPassword);
-
-
+1
 		
-		console.log("Created account for ", userName);
 	}
 
 	// -----------------------------------------------

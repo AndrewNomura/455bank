@@ -152,14 +152,16 @@ function Bank(name, initCustomerList)
 	this.createCustomerUI = function()
 	{
 		// Create user name
-		let userName = readline.question("Please pick a user name: ");
+		var userName = readline.question("Please pick a user name: ");
 		
 		// Pick the password 
-		let userPassword = readline.question("Please pick a user password: ");	
+		var userPassword = readline.question("Please pick a user password: ");	
 		
 		// Create and add user
 		this.createAndAddCustomer(userName, userPassword);
-1
+		
+		//shows the menu again if they want to do something else
+		this.masterChoice(userName, userPassword);
 		
 	}
 
@@ -227,6 +229,7 @@ function Bank(name, initCustomerList)
 			else //ADDED AN ELSE STATEMENT ********************
 			{
 				console.log("Input Error... Please Try again...\n\n");
+				var choice = readline.question("Choice: ");
 			}
 		}
 		while(choice < 7 && choice > 0);
@@ -281,8 +284,9 @@ function Bank(name, initCustomerList)
 				this.createCustomerUI();
 
 			else 					//added an else statement**************************
-				console.log("Input error... Please try again...\n\n")
-			
+				console.log("Input error... Please try again...\n\n");
+				var choice = readline.question("Choice: ");
+				
 		}while(choice != 1 && choice != 2);
 	}
 	
@@ -390,10 +394,13 @@ function Bank(name, initCustomerList)
 		if(accountType === 1) { choosenType = "savings"; }
 		if(accountType === 2) { choosenType = "checking"; }
 
-		
-		// The initial deposit	
-		let initialDeposit = readline.question("Please enter the deposit amount: ");
-
+		//error checking for deposit number can't have negative numbers or 0
+		do
+		{
+			// The initial deposit	
+			var initialDeposit = readline.question("Please enter the deposit amount: ");
+			console.log("Please enter a valid amount.");
+		} while(initialDeposit <= 0);
 		
 		console.log(choosenType);
 		// The account name
@@ -423,18 +430,22 @@ function Bank(name, initCustomerList)
 			}
 		);
 		
-		
-		// Get the deposit amount ********************
-		let depositAmount = readline.question("Please enter the deposit amount: ",
-			depositAmount =>
-			{
-				// Deposit the money	
-				account.deposit(depositAmount);	
-				console.log("Updated account information: ");
-				account.printAcct();
-			}
-		);		
+		//error checking for deposit number
+		do
+		{
+			// Get the deposit amount ********************
+			var depositAmount = readline.question("Please enter the deposit amount: ",
+				depositAmount =>
+				{
+					// Deposit the money	
+					account.deposit(depositAmount);	
+					console.log("Updated account information: ");
+					account.printAcct();
+				}	
+			);
 			
+		} while(depositAmount <= 0)
+		
 	}
 
 	// ------------------------------------------------------
@@ -445,7 +456,7 @@ function Bank(name, initCustomerList)
 		// Show all accounts of the user
 		this.viewAccounts(customer);
 		
-		// I MOVED EACH OTHER VRAIBLE INSIDE THE READLINE WHENEVER A VARIABLE INPUT
+		// I MOVED EACH OTHER VARIABLE INSIDE THE READLINE WHENEVER A VARIABLE INPUT
 		// NEEDS TO BE USED ****************
 		// Get the account choice
 		let accountIndex = readline.question("Please select an account by entering a choice (e.g., enter 1 for the first account) ",

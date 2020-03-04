@@ -231,7 +231,7 @@ function Bank(name, initCustomerList)
 				console.log("Input Error... Please Try again...\n\n");
 			}
 		}
-		while(choice < 7 && choice > 0)
+		while(choice < 7 && choice > 0);
 	}
 	
 	
@@ -373,27 +373,23 @@ function Bank(name, initCustomerList)
 		// AFTERWARDS*****************
 		// INSTEAD.. READ THE INPUT AND THEN CHECK IT ******************
 		let accountName = readline.question("Please choose an account name: ");	
-		// The account type
-		let choosenType = null;
+
+		//account type
+		var choosenType = null;
+
 		// Get the account type
-		let accountType = readline.question("Please choose (1) for savings and (2) for checking: ", (accountType) => {
-			// The account type: savings or checking
-			//ADD A DO WHILE LOOP AND AN ELSE IF FOR ANY OTHER INPUTS **************************
-			do 
-			{
-				if(accountType === 1) 
-					{ choosenType = "savings"; }
-				if(accountType === 2)
-					{ choosenType = "checking"; }
-				else 
-					{ console.log("Error. Please input another option: "); }
-			} while(accountType != 1 && accountType != 2);
-		});
-			
+		var accountType = readline.question("Please choose (1) for savings and (2) for checking: ");
+
+		// The account type: savings or checking
+		if(accountType === 1) { choosenType = "savings"; }
+		if(accountType === 2) { choosenType = "checking"; }
+
 		
 		// The initial deposit	
 		let initialDeposit = readline.question("Please enter the deposit amount: ");
+
 		
+		console.log(choosenType);
 		// The account name
 		// CHANGED THE accountType to "choosenType" SO THAT THE STRING GETS PASSED INTO THE NEW INFO AND NOT THE NUMBER***********
 		this.createAccount(customer, accountName, parseFloat(initialDeposit), choosenType);

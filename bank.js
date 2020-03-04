@@ -304,6 +304,14 @@ function Bank(name, initCustomerList)
 				
 			// Whether there was a match
 			var match = this.login(userName, userPassword);
+			
+			//error statement if there isn't an account
+			if (match == false)
+			{
+				console.log("User name and password are not found! Please create a new account!")
+				this.createCustomerUI();
+			}
+			
 		} while(!match);
 		
 		

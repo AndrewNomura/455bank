@@ -385,14 +385,14 @@ function Bank(name, initCustomerList)
 		let accountName = readline.question("Please choose an account name: ");	
 
 		//account type
-		var choosenType = null;
+		let choosenType = null;
 
 		// Get the account type
-		var accountType = readline.question("Please choose (1) for savings and (2) for checking: ");
+		let accountType = readline.question("Please choose (1) for savings and (2) for checking: ");
 
 		// The account type: savings or checking
-		if(accountType === 1) { choosenType = "savings"; }
-		if(accountType === 2) { choosenType = "checking"; }
+		if(accountType === "1") { choosenType = "savings"; }
+		else{ choosenType = "checking"; }
 
 		//error checking for deposit number can't have negative numbers or 0
 		do
@@ -401,8 +401,7 @@ function Bank(name, initCustomerList)
 			var initialDeposit = readline.question("Please enter the deposit amount: ");
 			console.log("Please enter a valid amount.");
 		} while(initialDeposit <= 0);
-		
-		console.log(choosenType);
+
 		// The account name
 		// CHANGED THE accountType to "choosenType" SO THAT THE STRING GETS PASSED INTO THE NEW INFO AND NOT THE NUMBER***********
 		this.createAccount(customer, accountName, parseFloat(initialDeposit), choosenType);

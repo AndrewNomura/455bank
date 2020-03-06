@@ -291,6 +291,7 @@ function Bank(name, initCustomerList)
 			console.log("What would you like to do?");
 			console.log("1. Login");
 			console.log("2. Create Account\n");
+			console.log("3. Exit\n");			
 			
 			// Get the choice
 			var choice = readline.question("Choice: ");	
@@ -303,10 +304,16 @@ function Bank(name, initCustomerList)
 			// Create new user account
 			else if (choice === "2")
 				this.createCustomerUI();
-
-			else 					//added an else statement**************************
+			
+			// Exit program
+			else if (choice === "3")
+				process.exit(3);
+			//added an else statement**************************
+			else
+			{
 				console.log("Input error... Please try again...\n\n");
 				var choice = readline.question("Choice: ");
+			}
 				
 		}while(choice != 1 && choice != 2);
 	}

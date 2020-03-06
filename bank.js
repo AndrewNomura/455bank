@@ -44,7 +44,7 @@ function Account(acctName, acctBalance, type)
 	// @param amount - the amount to deposit
 	this.deposit = function(amount) 		//ADDED IF FOR ANY NON VALID ENTRY *******************
 	{ 
-		this.acctBalance  = parseInt(this.acctBalance) +  parseInt(amount); 
+		this.acctBalance  = parseInt(this.acctBalance) +  parseInt(amount); // use parseInt() so that the ints don't get concatentated. ************
 	}
 	
 	// Withdraws money from the account
@@ -91,9 +91,13 @@ function Customer(userName, userPassword)
 	// @param acctIndex - the account index
 	// @return - the account based on the index	
 	this.getAccount = function(acctIndex) { return this.accounts[acctIndex]; }
+
+	// Removes an account based on the account index
+	this.removeAccount = function(chosenAccount) { delete this.chosenAccount; }
 		
 	// The list of accounts	
 	this.accounts = []	
+	
 }
 
 // ----------------------------------------------
@@ -412,6 +416,22 @@ function Bank(name, initCustomerList)
 		this.createAccount(customer, accountName, parseFloat(initialDeposit), choosenType);
 	}
 
+
+	// ------------------------------------------------------ **************
+	// The UI for Removing an account
+	// @param user - the owner of the account
+	// ------------------------------------------------------
+	this.closeAccount = function(customer)
+	{
+		// Get account name from user ***********
+		let chosenAccount = readline.question("Please choose an account to remove: ");
+
+		// Remove account of the user ***********
+		customer.removeAccount(chosenAccount);
+	}
+
+
+
 	// ------------------------------------------------------
 	// The UI for depositing money
 	// @param user - the owner of the account
@@ -434,7 +454,7 @@ function Bank(name, initCustomerList)
 		do
 		{
 			// Get the deposit amount ********************
-			let depositAmount = readline.question("Please enter the deposit amount: ");
+			var depositAmount = readline.question("Please enter the deposit amount: ");
 			
 			// Deposit the money	
 			account.deposit(depositAmount);	

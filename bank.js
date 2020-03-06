@@ -61,6 +61,7 @@ function Account(acctName, acctBalance, type)
 		console.log("Account type: ", this.getAccountType());
 		console.log("Account balance: ", this.getBalance(), "\n");
 	}
+
 }
 
 // ------------------------------------------------
@@ -86,14 +87,25 @@ function Customer(userName, userPassword)
 	// Add account
 	// @param account - the account
 	this.addAccount = function(account) { this.accounts.push(account); }
+
+	// Remove account **********
+	// Removes an account based on the account index
+	this.removeAccount = function(rAcct) 
+	{ 
+		for (let i = this.accounts.length - 1; i >= 0; i--)
+		{
+			if (this.accounts[i] == this.accounts[rAcct-1])
+			{
+				this.accounts.splice(i, 1);
+				break;
+			}
+		}
+	}
 	
 	// Returns the account based on the account index
 	// @param acctIndex - the account index
 	// @return - the account based on the index	
 	this.getAccount = function(acctIndex) { return this.accounts[acctIndex]; }
-
-	// Removes an account based on the account index
-	this.removeAccount = function(chosenAccount) { delete this.chosenAccount; }
 		
 	// The list of accounts	
 	this.accounts = []	
@@ -378,6 +390,18 @@ function Bank(name, initCustomerList)
 		// Add account to the user
 		customer.addAccount(account);
 	}	
+
+	// ------------------------------------------------------ **************
+	// The UI for Removing an account
+	// @param user - the owner of the account
+	// ------------------------------------------------------
+	this.closeAccount = function(customer, acctName, initialDeposits, type)
+	{
+		// Get account name from user ***********
+		let rAcct = readline.question("Please choose an account to remove (e.g., enter 1 for the first account) ");
+		// Remove account of the user ***********
+		customer.removeAccount(rAcct, type);
+	}
 	
 	
 	// ----------------------------------------------------
@@ -415,22 +439,6 @@ function Bank(name, initCustomerList)
 		// CHANGED THE accountType to "choosenType" SO THAT THE STRING GETS PASSED INTO THE NEW INFO AND NOT THE NUMBER***********
 		this.createAccount(customer, accountName, parseFloat(initialDeposit), choosenType);
 	}
-
-
-	// ------------------------------------------------------ **************
-	// The UI for Removing an account
-	// @param user - the owner of the account
-	// ------------------------------------------------------
-	this.closeAccount = function(customer)
-	{
-		// Get account name from user ***********
-		let chosenAccount = readline.question("Please choose an account to remove: ");
-
-		// Remove account of the user ***********
-		customer.removeAccount(chosenAccount);
-	}
-
-
 
 	// ------------------------------------------------------
 	// The UI for depositing money

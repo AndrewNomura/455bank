@@ -167,12 +167,36 @@ function Bank(name, initCustomerList)
 	// ----------------------------------------------
 	this.createCustomerUI = function()
 	{
-		// Create user name
-		var userName = readline.question("Please pick a user name: ");
+		do
+		{
+			// Create user name
+			var userName = readline.question("Please pick a user name: ");
 		
-		// Pick the password 
-		var userPassword = readline.question("Please pick a user password: ");	
-		
+			// Pick the password 
+			var userPassword = readline.question("Please pick a user password: ");	
+			
+			//Variable to test if there is an existing user with the same user name
+			var match = false;
+			
+			// Is this a registered user?
+			if(userName in this.customers)
+			{
+				match = true;
+			}
+			
+			//Error statement for having the same user name as an exisiting user.
+			while (match == true)
+			{
+				console.log("There is an existing user name. Please pick a different user name and user password.");
+				this.createCustomerUI(userName, userPassword);
+				if (userName in this.customers == false)
+				{
+					match = false;
+				}
+			}
+		} while (match == true);
+				
+				
 		// Create and add user
 		this.createAndAddCustomer(userName, userPassword);
 		
@@ -290,7 +314,7 @@ function Bank(name, initCustomerList)
 		{
 			console.log("What would you like to do?");
 			console.log("1. Login");
-			console.log("2. Create Account\n");
+			console.log("2. Create Account");
 			console.log("3. Exit\n");			
 			
 			// Get the choice
@@ -340,8 +364,8 @@ function Bank(name, initCustomerList)
 			//error statement if there isn't an account
 			if (match == false)
 			{
-				console.log("User name and password are not found! Please create a new account!")
-				this.createCustomerUI();
+				console.log("User name and password are not found! Please log in with the correct credentials or create a new account!")
+				this.masterChoice();
 			}
 			
 		} while(!match);

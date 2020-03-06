@@ -232,7 +232,7 @@ function Bank(name, initCustomerList)
 				var choice = readline.question("Choice: ");
 			}
 		}
-		while(choice < 7 && choice > 0);
+		while(choice < 8 && choice > 0);
 	}
 	
 	

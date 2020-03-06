@@ -44,14 +44,14 @@ function Account(acctName, acctBalance, type)
 	// @param amount - the amount to deposit
 	this.deposit = function(amount) 		//ADDED IF FOR ANY NON VALID ENTRY *******************
 	{ 
-		this.acctBalance  = this.acctBalance +  amount; 
+		this.acctBalance  = parseInt(this.acctBalance) +  parseInt(amount); 
 	}
 	
 	// Withdraws money from the account
 	// @param amount - the amount to withdraw
 	this.withdraw = function(amount)
 	{ 
-		this.acctBalance = this.acctBalance - amount; 
+		this.acctBalance = parseInt(this.acctBalance) - parseInt(amount); 
 	}
 	
 	// Prints the account information
@@ -426,27 +426,20 @@ function Bank(name, initCustomerList)
 		
 		// Get the account choice
 		// PUT THE ACCOUNT IN THE REEADLINE BECASUE THE READLINE DOESN'T SAVE THE INPUT*******************
-		let accountIndex = readline.question("Please select an account by entering a choice (e.g., enter 1 for the first account) ", 
-			accountIndex =>  
-			{
-				// Get the account based on index
-				let account = user.getAccount(accountIndex - 1);
-			}
-		);
+		let accountIndex = readline.question("Please select an account by entering a choice (e.g., enter 1 for the first account) ");
 		
+		// Get the account based on index
+				let account = user.getAccount(accountIndex - 1);
 		//error checking for deposit number
 		do
 		{
 			// Get the deposit amount ********************
-			var depositAmount = readline.question("Please enter the deposit amount: ",
-				depositAmount =>
-				{
-					// Deposit the money	
-					account.deposit(depositAmount);	
-					console.log("Updated account information: ");
-					account.printAcct();
-				}	
-			);
+			let depositAmount = readline.question("Please enter the deposit amount: ");
+			
+			// Deposit the money	
+			account.deposit(depositAmount);	
+			console.log("Updated account information: ");
+			account.printAcct();
 			
 		} while(depositAmount <= 0)
 		
@@ -463,27 +456,21 @@ function Bank(name, initCustomerList)
 		// I MOVED EACH OTHER VARIABLE INSIDE THE READLINE WHENEVER A VARIABLE INPUT
 		// NEEDS TO BE USED ****************
 		// Get the account choice
-		let accountIndex = readline.question("Please select an account by entering a choice (e.g., enter 1 for the first account) ",
-			accountIndex => 
-			{
-				let account = customer.getAccount(accountIndex - 1);
-			}
-		);
+		let accountIndex = readline.question("Please select an account by entering a choice (e.g., enter 1 for the first account) ");
+			
+		let account = customer.getAccount(accountIndex - 1);
 		
 		// I MOVED EACH OTHER VRAIBLE INSIDE THE READLINE WHENEVER A VARIABLE INPUT
 		// NEEDS TO BE USED ****************
 		// Get the withdraw amount
-		let withdrawAmount = readline.question("Please enter the withraw amount: ",
-			withdrawAmount =>
-			{
-				// Deposit the money	
-				account.withdraw(withdrawAmount);	
+		let withdrawAmount = readline.question("Please enter the withraw amount: ");
 
-				// Show the updated account information	
-				console.log("Updated account information: ");
-				account.printAcct();
-			}
-		);
+		// Deposit the money	
+		account.withdraw(withdrawAmount);	
+
+		// Show the updated account information	
+		console.log("Updated account information: ");
+		account.printAcct();
 	}
 
 	

@@ -190,41 +190,46 @@ function Bank(name, initCustomerList)
 			// Decide what to do
 			
 			// Deposit	
-			if(choice == 1)
+			if(choice === "1")
 			{
 				console.log("Deposit");
 				this.depositUI(customer);
 			}
 			// Withdraw
-			else if(choice == 2)
+			else if(choice === "2")
 			{
 				console.log("Withdraw");
 				this.withdrawUI(customer);
 			}
 			// Transfer
-			else if(choice == 3)
+			else if(choice === "3")
 			{
 				console.log("Transfer");
 				this.transferUI(customer);
 			}
 			// View accounts
-			else if(choice == 4)
+			else if(choice === "4")
 			{
 				console.log("View Accounts");
 				this.viewAccounts(customer);
 				
 			}
 			// Open new account
-			else if(choice == 5)
+			else if(choice === "5")
 			{
 				console.log("Open New Account");
 				this.openAccountUI(customer);
 			}
 			// Close customer account
-			else if(choice == 6)
+			else if(choice === "6")
 			{
 				console.log("Remove Account");
-				this.closeAccount(customer)
+				this.closeAccount(customer);
+			}
+			else if(choice === "7")
+			{
+				console.log("Logging Out");
+				this.masterChoice();
 			}
 			else //ADDED AN ELSE STATEMENT ********************
 			{

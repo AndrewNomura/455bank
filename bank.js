@@ -463,8 +463,7 @@ function Bank(name, initCustomerList)
 		{
 			// The initial deposit	
 			var initialDeposit = readline.question("Please enter the deposit amount: ");
-			console.log("Please enter a valid amount.");
-		} while(initialDeposit <= 0);
+		} while(initialDeposit <= 0 || isNan(initialDeposit);
 
 		// The account name
 		// CHANGED THE accountType to "choosenType" SO THAT THE STRING GETS PASSED INTO THE NEW INFO AND NOT THE NUMBER***********
@@ -494,14 +493,12 @@ function Bank(name, initCustomerList)
 		{
 			// Get the deposit amount ********************
 			var depositAmount = readline.question("Please enter the deposit amount: ");
+		} while(depositAmount <= 0 || isNaN(depositAmount));
 			
-			// Deposit the money	
-			account.deposit(depositAmount);	
-			console.log("Updated account information: ");
-			account.printAcct();
-			
-		} while(depositAmount <= 0)
-		
+		// Deposit the money	
+		account.deposit(depositAmount);	
+		console.log("Updated account information: ");
+		account.printAcct();
 	}
 
 	// ------------------------------------------------------
@@ -521,8 +518,17 @@ function Bank(name, initCustomerList)
 		
 		// I MOVED EACH OTHER VRAIBLE INSIDE THE READLINE WHENEVER A VARIABLE INPUT
 		// NEEDS TO BE USED ****************
-		// Get the withdraw amount
-		let withdrawAmount = readline.question("Please enter the withraw amount: ");
+		
+		do
+		{
+			// Get the withdraw amount
+			var withdrawAmount = readline.question("Please enter the withdraw amount: ");
+			if(withdrawAmount > this.getBalance())
+			{
+				console.log("There is not enough money in the account to withdraw.");
+				var withdrawAmount = readline.question("Please enter the withdraw amount: ");
+			}
+		} while (withAmount > this.getBalance() || isNan(withdrawAmount));
 
 		// Deposit the money	
 		account.withdraw(withdrawAmount);	

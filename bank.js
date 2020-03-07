@@ -463,7 +463,7 @@ function Bank(name, initCustomerList)
 		{
 			// The initial deposit	
 			var initialDeposit = readline.question("Please enter the deposit amount: ");
-		} while(initialDeposit <= 0 || isNan(initialDeposit);
+		} while(initialDeposit <= 0);
 
 		// The account name
 		// CHANGED THE accountType to "choosenType" SO THAT THE STRING GETS PASSED INTO THE NEW INFO AND NOT THE NUMBER***********

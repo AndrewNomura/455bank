@@ -519,16 +519,17 @@ function Bank(name, initCustomerList)
 		// I MOVED EACH OTHER VRAIBLE INSIDE THE READLINE WHENEVER A VARIABLE INPUT
 		// NEEDS TO BE USED ****************
 		
+		// Get the withdraw amount
+		let withdrawAmount = readline.question("Please enter the withdraw amount: ");
+
 		do
 		{
-			// Get the withdraw amount
-			var withdrawAmount = readline.question("Please enter the withdraw amount: ");
-			if(withdrawAmount > this.getBalance())
+			if(withdrawAmount > account.acctBalance)
 			{
 				console.log("There is not enough money in the account to withdraw.");
-				var withdrawAmount = readline.question("Please enter the withdraw amount: ");
+				withdrawAmount = readline.question("Please enter the withdraw amount: ");
 			}
-		} while (withAmount > this.getBalance() || isNan(withdrawAmount));
+		} while (withdrawAmount > account.acctBalance);
 
 		// Deposit the money	
 		account.withdraw(withdrawAmount);	
